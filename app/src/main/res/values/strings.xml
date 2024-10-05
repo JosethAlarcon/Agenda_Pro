@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Agenda Pro</string>
+
+    <!--Actividad Registro-->
+    <string name="CrearCuentaTXT">Crear una cuenta</string>
+    <string name="NombreTXT">Nombres</string>
+    <string name="CorreoTXT">Correo Electronico</string>
+    <string name="ContrasenaTXT">Contraseña</string>
+    <string name="ConfirmarContrasenaTXT">Confirmar Contraseña</string>
+    <string name="RegistrarUsuarioTXT">Registrarse</string>
+    <string name="TengoCuentaTXT">Tengo una Cuenta</string>
+    <string name="SesionTXT">Inicio de Sesion</string>
+    <string name="LoginTXT">Login</string>
+    <string name="TaxiTXT">Transporte de Pasajeros</string>
+    <string name="MudanzaTXT">Transporte para Mudanza</string>
+    <string name="EncomiendaTXT">Transporte de Encomiendas</string>
+</resources>

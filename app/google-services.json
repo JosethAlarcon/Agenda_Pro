@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "132796647541",
+    "project_id": "agenda-pro-1206b",
+    "storage_bucket": "agenda-pro-1206b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132796647541:android:8db8987e1b367e2438903c",
+        "android_client_info": {
+          "package_name": "com.josethcodedev.agenda_pro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD95ziN7BYZ7GdDyOWjLFHO8NV3h69XYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
