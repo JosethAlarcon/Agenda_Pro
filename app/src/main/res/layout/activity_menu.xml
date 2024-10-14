@@ -8,54 +8,49 @@
     android:background="@drawable/fondo_aplicacion"
     tools:context=".Menu_act">
 
-    <Button
-        android:id="@+id/btn_pasajero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="#00BCD4"
-        android:fontFamily="@font/worksans"
-        android:textSize="18sp"
-        android:text="@string/TaxiTXT"
+    <ViewFlipper
+        android:id="@+id/slider"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.345" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="324dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/slider" />
 
     <Button
-        android:id="@+id/btn_mudanza"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_seleccionar"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="@string/MudanzaTXT"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#00BCD4"
         android:fontFamily="@font/worksans"
-        android:textSize="18sp"
+        android:text="Reservar"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_pasajero" />
+        app:layout_constraintTop_toBottomOf="@+id/textoOpcion" />
 
-    <Button
-        android:id="@+id/btn_encomienda"
+    <TextView
+        android:id="@+id/textoOpcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:backgroundTint="#00BCD4"
-        android:fontFamily="@font/worksans"
-        android:text="@string/EncomiendaTXT"
-        android:textSize="18sp"
+        android:layout_marginTop="24dp"
+        android:text="Selecciona una opcion"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_mudanza" />
-
-    <ViewFlipper
-        android:id="@+id/slider"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.167" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.josethcodedev.agenda_pro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -66,7 +67,7 @@ public class Registro extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.106.1/agenda_mysql/registro.php");
+                    URL url = new URL("http://192.168.100.32/agenda_mysql/registro.php");
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST"); //Enviar los adatos
                     httpURLConnection.setDoOutput(true); //Enviamos de salida
@@ -115,6 +116,7 @@ public class Registro extends AppCompatActivity {
                         @Override
                         public void run() {
                             Toast.makeText(Registro.this, "Registro Exitoso: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(Registro.this, Login.class));
                         }
                     });
                 }
