@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import models.LoginResponse;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,15 +42,14 @@ public class Login extends AppCompatActivity {
         );
     }
 
+
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://192.168.100.32/agenda_mysql/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
     ApiService apiService = retrofit.create(ApiService.class);
-
-
-     */
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,7 @@ public class Login extends AppCompatActivity {
         CorreoTXT = findViewById(R.id.CorreoTXT);
         ContrasenaTXT = findViewById(R.id.ContrasenaTXT);
         login_btn = findViewById(R.id.Login_btn);
+
 
         //Metodo para probar aplicacion sin hacer login con base de datos
         login_btn.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +106,6 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
             }
         });
-        */
+         */
     }
 }

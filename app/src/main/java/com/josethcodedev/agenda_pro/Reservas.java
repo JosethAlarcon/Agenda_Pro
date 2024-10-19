@@ -2,7 +2,6 @@ package com.josethcodedev.agenda_pro;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,11 +17,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import models.Reserva;
+import models.ReservasAdapter;
+
 public class Reservas extends AppCompatActivity {
 
     ListView reservasListView;
-    ArrayList<String> reservasList;
-    ArrayAdapter<String> adapter;
+    ArrayList<Reserva> reservasList; // Cambiado a ArrayList de Reservas
+    ReservasAdapter adapter; // Usar el adaptador personalizado
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,8 @@ public class Reservas extends AppCompatActivity {
         reservasListView = findViewById(R.id.reservas_lista);
         reservasList = new ArrayList<>();
 
-        // Inicializar el ArrayAdapter
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, reservasList);
+        // Inicializar el adaptador personalizado
+        adapter = new ReservasAdapter(this, reservasList);
         reservasListView.setAdapter(adapter);
 
         // Llamar al método para obtener las reservas
@@ -62,11 +64,14 @@ public class Reservas extends AppCompatActivity {
                     in.close();
                     httpURLConnection.disconnect();
 
+                    // Verificar la respuesta del servidor
+                    Log.d("Reservas", "Respuesta del servidor: " + response.toString());
+
                     // Procesar la respuesta JSON
                     procesarReservas(response.toString());
 
                 } catch (Exception e) {
-                    Log.e("ReservasError", e.getMessage());
+                    Log.e("ReservasError", "Error en la conexión: " + e.getMessage());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -80,32 +85,55 @@ public class Reservas extends AppCompatActivity {
 
     private void procesarReservas(String response) {
         try {
+            // Verificar si la respuesta es vacía
+            if (response == null || response.isEmpty()) {
+                Log.e("ReservasError", "La respuesta es vacía");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(Reservas.this, "No se recibieron datos", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return;
+            }
+
+            // Procesar el JSON
             JSONArray jsonArray = new JSONArray(response);
+            Log.d("Reservas", "Número de reservas: " + jsonArray.length());
+            Log.d("Reservas", "Respuesta del servidor: " + response);
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject reserva = jsonArray.getJSONObject(i);
-                String direccionInicio = reserva.getString("direccionInicio");
-                String direccionDestino = reserva.getString("direccionDestino");
-                String fecha = reserva.getString("fecha");
-                String horario = reserva.getString("horario");
-                String pago = reserva.getString("metodoPago");
 
-                // Agregar los datos al ArrayList
-                reservasList.add("Inicio: " + direccionInicio + "\nDestino: " + direccionDestino +
-                        "\nFecha: " + fecha + "\nHorario: " + horario +
-                        "\nMétodo de pago: " + pago);
+                // Verificar que cada campo exista en el JSON
+                String direccionInicio = reserva.optString("direccionInicio", "N/A");
+                String direccionDestino = reserva.optString("direccionDestino", "N/A");
+                String fecha = reserva.optString("fecha", "N/A");
+                String horario = reserva.optString("horario", "N/A");
+                String pago = reserva.optString("metodoPago", "N/A");
+
+                // Agregar los datos al ArrayList de tipo Reservas
+                reservasList.add(new Reserva("Inicio: " + direccionInicio,
+                        "Destino: " + direccionDestino,
+                        "Fecha: " + fecha,
+                        "Horario: " + horario,
+                        "Metodo de Pago: " + pago));
             }
 
             // Actualizar el ListView en la UI principal
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    adapter.notifyDataSetChanged();
+                    if (!reservasList.isEmpty()) {
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(Reservas.this, "No hay reservas disponibles", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e("ReservasError", "Error al procesar JSON: " + e.getMessage());
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
